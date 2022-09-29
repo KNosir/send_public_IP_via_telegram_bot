@@ -1,7 +1,7 @@
 from requests import post, get
 from time import sleep
 
-ip = get('https://api.ipify.org').text
+
 
 time_in_second = 1000
 
@@ -18,5 +18,6 @@ def send_to_telegram(message):
         print(e)
     print(type(response.text))
 while True:
+    ip = get('https://api.ipify.org').text
     send_to_telegram(ip)
     sleep(time_in_second)
