@@ -12,8 +12,7 @@ time_in_second = 1000
 def send_to_telegram(message, chatID, apiURL):
 
     try:
-        response = post(apiURL, json={'chat_id': chatID, 'text': message})
-        return response.text
+        return post(apiURL, json={'chat_id': chatID, 'text': message}).text
     except Exception as e:
         return e
 
