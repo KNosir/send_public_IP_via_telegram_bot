@@ -2,22 +2,29 @@ from requests import post, get
 from time import sleep
 
 
+apiToken = 'token'
+apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
+
 
 time_in_second = 1000
 
-def send_to_telegram(message):
 
-    apiToken = 'token'
-    chatID = 'Number'
-    apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
+def send_to_telegram(message, chatID, apiURL):
 
     try:
         response = post(apiURL, json={'chat_id': chatID, 'text': message})
-        print(response.text)
+        return response.text
     except Exception as e:
-        print(e)
-    print(type(response.text))
+        return e
+
+
+def get_ip():
+    try:
+        return get('https://api.ipify.org').text
+    except Exception as e:
+        return e
+
+
 while True:
-    ip = get('https://api.ipify.org').text
-    send_to_telegram(ip)
+    send_to_telegram(get_ip(), chatID, apiURL)
     sleep(time_in_second)
